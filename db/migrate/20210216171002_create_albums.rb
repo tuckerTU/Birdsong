@@ -7,7 +7,6 @@ class CreateAlbums < ActiveRecord::Migration[5.2]
       t.string :year
       t.string :length
       t.string :genre
-      t.string :artwork_url
       t.string :average_rating
       t.integer :album_id
 
