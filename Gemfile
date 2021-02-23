@@ -8,6 +8,7 @@ gem 'require_all'
 gem 'thin'
 gem 'shotgun'
 gem 'bcrypt'
+gem 'dotenv'
 
 group :developemnt do 
   gem 'pry'
