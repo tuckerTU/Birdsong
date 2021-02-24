@@ -1,5 +1,3 @@
-require './config/environment'
-
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -35,6 +33,6 @@ class ApplicationController < Sinatra::Base
       if !logged_in?
         redirect "/login"
       end
+    end
   end
-
 end

@@ -7,13 +7,20 @@ class UsersController < ApplicationController
 
   # POST: /users
   post "/signup" do
-    redirect "/users"
+    user = User.create(params["user"])
+    if user.valid?
+      session["usr_id"] = user.id
+      redirect '/profile'
+    else
+      flash[:error] = user.errors.full_messages.first
+      redirect '/signup'
+    end
   end
 
-  # # GET: /users/5
-  # get "/users/:id" do
-  #   erb :"/users/show.html"
-  # end
+    # GET: /users/5
+   get "/profile" do
+     erb :"/users/show.html"
+   end
 
   # # GET: /users/5/edit
   # get "/users/:id/edit" do
