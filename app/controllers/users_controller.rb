@@ -18,22 +18,36 @@ class UsersController < ApplicationController
   end
 
     # GET: /users/5
-   get "/profile" do
-     erb :"/users/show.html"
-   end
+  get "/profile" do
+    erb :"/users/show.html"
+  end
 
-  # # GET: /users/5/edit
-  # get "/users/:id/edit" do
-  #   erb :"/users/edit.html"
-  # end
+  get '/login' do
+    if logged_in?
+      redirect "user/#{current_user.slug}"
+    else
+      erb :'/users/login'
+    end
+  end
 
-  # # PATCH: /users/5
-  # patch "/users/:id" do
-  #   redirect "/users/:id"
-  # end
+  post '/login' do
+    @user = User.find_by(username: params[:username])
 
-  # # DELETE: /users/5/delete
-  # delete "/users/:id/delete" do
-  #   redirect "/users"
-  # end
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect "/user/#{@user.slug}"
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect '/login'
+    else
+      redirect '/login'
+    end
+  end
+
 end
