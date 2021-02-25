@@ -1,1 +1,6 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>Welcome, <%=current_user.username%></h1>
+<ul>
+<%current_user.albums.each do |album|%>
+<li><%=album.title%></li>
+<%end%>
+</ul>
